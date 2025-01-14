@@ -31,10 +31,34 @@
         input:focus {
             border: 1px solid #007BFF;
         }
+        .instructions {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
     </style>
 </head>
 <body>
     <h1>Simple Spreadsheet</h1>
+
+    <div class="instructions">
+        <h2>How to Use</h2>
+        <p>This simple spreadsheet allows you to enter values and perform basic calculations. Here are the steps to use it:</p>
+        <ul>
+            <li>Click on any cell to enter a value or a formula.</li>
+            <li>To perform a calculation, start your input with <code>=</code>. For example:</li>
+            <ul>
+                <li><code>=2+2</code> calculates the sum of 2 and 2.</li>
+                <li><code>=10/2</code> divides 10 by 2.</li>
+                <li><code>=5*3</code> multiplies 5 by 3.</li>
+                <li><code>=8-3</code> subtracts 3 from 8.</li>
+            </ul>
+            <li>Press <strong>Enter</strong> or click outside the cell to see the result.</li>
+            <li>If a formula is invalid, the cell will be cleared, and you will see an alert.</li>
+        </ul>
+    </div>
+
     <table id="spreadsheet">
         <thead>
             <tr>
@@ -104,3 +128,4 @@
     </script>
 </body>
 </html>
+
