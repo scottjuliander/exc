@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Spreadsheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        input {
+            width: 100%;
+            border: none;
+            text-align: center;
+            outline: none;
+        }
+        input:focus {
+            border: 1px solid #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Spreadsheet</h1>
+    <table id="spreadsheet">
+        <thead>
+            <tr>
+                <th></th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Generate rows dynamically using JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        const rows = 10; // Number of rows
+        const columns = 4; // Number of columns
+
+        const spreadsheetBody = document.querySelector('#spreadsheet tbody');
+
+        // Function to generate the spreadsheet
+        function generateSpreadsheet() {
+            for (let i = 1; i <= rows; i++) {
+                const row = document.createElement('tr');
+
+                // Add row header
+                const rowHeader = document.createElement('th');
+                rowHeader.textContent = i;
+                row.appendChild(rowHeader);
+
+                // Add cells
+                for (let j = 0; j < columns; j++) {
+                    const cell = document.createElement('td');
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.dataset.row = i;
+                    input.dataset.col = String.fromCharCode(65 + j); // A, B, C, D
+                    input.addEventListener('blur', evaluateCell);
+                    cell.appendChild(input);
+                    row.appendChild(cell);
+                }
+
+                spreadsheetBody.appendChild(row);
+            }
+        }
+
+        // Function to evaluate cell content
+        function evaluateCell(event) {
+            const input = event.target;
+            const value = input.value;
+
+            try {
+                if (value.startsWith('=')) {
+                    const formula = value.substring(1); // Remove '='
+                    const result = eval(formula); // Evaluate the formula
+                    input.value = result;
+                }
+            } catch (e) {
+                alert('Invalid formula');
+                input.value = '';
+            }
+        }
+
+        // Generate the spreadsheet on page load
+        generateSpreadsheet();
+    </script>
+</body>
+</html>
